@@ -1,10 +1,8 @@
 package org.dongguk.sayoung.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.dongguk.sayoung.domain.Content;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @AllArgsConstructor

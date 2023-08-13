@@ -7,6 +7,7 @@ import org.dongguk.sayoung.service.ContentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,11 +22,11 @@ public class ContentController {
     }
 
     @PostMapping("/content/new")
-    public String createContent(ContentDto data) {
+    public String createContent(ContentDto data, MultipartFile file) {
 
         log.info(data.toString());
 
-        contentService.createContent(data);
+        contentService.createContent(data, file);
 
         return "redirect:/admin";
     }

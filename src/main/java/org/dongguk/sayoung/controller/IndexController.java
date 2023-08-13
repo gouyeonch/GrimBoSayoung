@@ -26,6 +26,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/about")
+    public String aboutController() {
+        return "about";
+    }
+
     @PostMapping("/admin")
     public String checkController(LoginDto data) {
 
