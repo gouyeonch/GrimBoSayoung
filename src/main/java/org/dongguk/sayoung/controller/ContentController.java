@@ -22,11 +22,11 @@ public class ContentController {
     }
 
     @PostMapping("/content/new")
-    public String createContent(ContentDto data, MultipartFile file) {
+    public String createContent(ContentDto data, MultipartFile pic) {
 
         log.info(data.toString());
 
-        contentService.createContent(data, file);
+        contentService.createContent(data, pic);
 
         return "redirect:/admin";
     }

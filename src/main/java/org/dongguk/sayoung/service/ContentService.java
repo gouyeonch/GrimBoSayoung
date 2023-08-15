@@ -6,11 +6,14 @@ import org.dongguk.sayoung.domain.Content;
 import org.dongguk.sayoung.dto.ContentDto;
 import org.dongguk.sayoung.repository.ContentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
@@ -25,16 +28,24 @@ public class ContentService {
             Content content = data.toEntity();
             log.info("create service");
 
-            String uploadDir = "/static/img/";
+            String uploadDir = "/img/";
             String fileName = data.getTitle();
+            String originalFilename = file.getOriginalFilename();
+            String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
             log.info(data.toString());
-            Path filePath = Path.of(uploadDir + fileName);
 
-            log.info(filePath.toString());
+            Path copyOfLocation = Paths.get("src/main/resources/static/img" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
 
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+//            Path filePath = Path.of(uploadDir + fileName + "." + extension);
 
-            content.setFilepath(filePath.toString());
+            log.info(copyOfLocation.toString());
+
+            Files.copy(file.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            log.info(copyOfLocation.toString());
+
+            //저장되는것 까지 완료
+            content.setFilepath(copyOfLocation.toString());
             Content saved = contentRepository.save(content);
 
             log.info(saved.toString());
