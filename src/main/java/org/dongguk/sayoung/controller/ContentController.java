@@ -46,16 +46,17 @@ public class ContentController {
 
     @DeleteMapping("/content/delete/{id}")
     public String deleteContent(@PathVariable Long id) {
-
-        log.info("delete " + id);
-
         contentService.deleteContent(id);
 
         return "adminIndex";
     }
 
-//    @GetMapping("/content/update/{id}")
-//    public String getUpdateContent(@PathVariable Long id){
-//
-//    }
+    @GetMapping("/content/update/{id}")
+    public String getUpdateContent(@PathVariable Long id, Model model){
+        Content content = contentService.getContent(id);
+
+        model.addAttribute("content", content);
+
+        return "content/updateContent";
+    }
 }
