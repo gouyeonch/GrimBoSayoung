@@ -2,15 +2,22 @@ package org.dongguk.sayoung.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dongguk.sayoung.domain.Content;
 import org.dongguk.sayoung.dto.LoginDto;
+import org.dongguk.sayoung.repository.ContentRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class IndexController {
+    private final ContentRepository contentRepository;
+
     @GetMapping("/")
     public String indexController() {
         return "index";
@@ -45,7 +52,14 @@ public class IndexController {
     }
 
     @GetMapping("/admin")
-    public String returnAdminIndex() {
+    public String returnAdminIndex(Model model) {
+        // 모든 아티클 가져오기
+        List<Content> contentsList = (List<Content>) contentRepository.findAll();
+
+        // 가져온 아티클 묶음을 뷰로 전달
+        model.addAttribute("contents", contentsList);
+
+        // 뷰 페이지를 설정
         return "adminIndex";
     }
 }

@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -41,7 +42,9 @@ public class ContentService {
             log.info("img saved");
 
             //저장되는것 까지 완료
-            content.setFilepath(copyOfLocation.toString());
+            String pathString = copyOfLocation.toString().substring(25);
+            log.info(pathString);
+            content.setFilepath(pathString);
 
             Content saved = contentRepository.save(content);
 
@@ -51,5 +54,16 @@ public class ContentService {
         }
 
         return "";
+    }
+
+    public Content getContent(Long id) {
+        Content content = contentRepository.findById(id).orElseThrow(
+                () -> new NullPointerException()
+        );
+        return content;
+    }
+
+    public void deleteContent(Long id) {
+        contentRepository.deleteById(id);
     }
 }
