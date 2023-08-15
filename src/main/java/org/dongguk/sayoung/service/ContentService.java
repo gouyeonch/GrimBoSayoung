@@ -23,29 +23,26 @@ public class ContentService {
     private final ContentRepository contentRepository;
 
     public String createContent(ContentDto data, MultipartFile file) {
-
+        log.info("create service");
         try {
             Content content = data.toEntity();
-            log.info("create service");
 
-            String uploadDir = "/img/";
-            String fileName = data.getTitle();
-            String originalFilename = file.getOriginalFilename();
-            String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
             log.info(data.toString());
 
-            Path copyOfLocation = Paths.get("src/main/resources/static/img" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+            String uploadDir = "src/main/resources/static/img";
+            String originalFilename = file.getOriginalFilename();
 
-//            Path filePath = Path.of(uploadDir + fileName + "." + extension);
+            Path copyOfLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(originalFilename));
 
             log.info(copyOfLocation.toString());
 
             Files.copy(file.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            log.info(copyOfLocation.toString());
+            log.info("img saved");
 
             //저장되는것 까지 완료
             content.setFilepath(copyOfLocation.toString());
+
             Content saved = contentRepository.save(content);
 
             log.info(saved.toString());
