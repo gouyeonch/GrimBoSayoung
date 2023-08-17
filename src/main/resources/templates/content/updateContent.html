@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item">
-                    <a class="nav-link" href="#!">About</a>
+                    <a class="nav-link" href="/admin/about">About</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -47,7 +47,7 @@
 
 <img class="card-img-top" th:src="${content.filepath}" alt="..."/>
 
-<form id="newContent" th:action="@{/content/update/{id}(id=${content.id})}" th:method="put" enctype="multipart/form-data">
+<form id="newContent" th:action="@{/admin/content/update/{id}(id=${content.id})}" th:method="put" enctype="multipart/form-data">
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">title</span>
         <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" th:value="${content.title}" name="title">

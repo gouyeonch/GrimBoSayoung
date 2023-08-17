@@ -5,3 +5,15 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+
+function delete_confirm(){
+
+    if(confirm("정말로 삭제하시겠습니까?")){
+        alert("삭제되었습니다");
+        document.getElementById("delete_form").submit();
+        return true;
+    }
+    else{
+        return false
+    }
+}

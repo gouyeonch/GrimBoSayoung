@@ -17,12 +17,21 @@ public class ContentController {
 
     private final ContentService contentService;
 
-    @GetMapping("/content/new")
+    @GetMapping("/content/{id}")
+    public String viewContent(@PathVariable Long id, Model model) {
+        Content content = contentService.getContent(id);
+
+        model.addAttribute("content", content);
+
+        return "content/view";
+    }
+
+    @GetMapping("/admin/content/new")
     public String newContentForm() {
         return "content/newContent";
     }
 
-    @PostMapping("/content/new")
+    @PostMapping("/admin/content/new")
     public String createContent(ContentDto data, MultipartFile pic) {
 
         log.info(data.toString());
@@ -33,7 +42,7 @@ public class ContentController {
     }
 
     @GetMapping("/admin/content/{id}")
-    public String viewContent(@PathVariable Long id, Model model) {
+    public String adminViewContent(@PathVariable Long id, Model model) {
         Content content = contentService.getContent(id);
 
         model.addAttribute("content", content);
@@ -41,14 +50,14 @@ public class ContentController {
         return "content/adminView";
     }
 
-    @DeleteMapping("/content/delete/{id}")
+    @DeleteMapping("/admin/content/delete/{id}")
     public String deleteContent(@PathVariable Long id) {
         contentService.deleteContent(id);
 
-        return "adminIndex";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/content/update/{id}")
+    @GetMapping("/admin/content/update/{id}")
     public String getUpdateContent(@PathVariable Long id, Model model) {
         Content content = contentService.getContent(id);
 
@@ -57,7 +66,7 @@ public class ContentController {
         return "content/updateContent";
     }
 
-    @PutMapping("/content/update/{id}")
+    @PutMapping("/admin/content/update/{id}")
     public String putUpdateContent(@PathVariable Long id, ContentDto data) {
 
         contentService.updateContent(data, id);

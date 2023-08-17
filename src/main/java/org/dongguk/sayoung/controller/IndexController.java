@@ -19,7 +19,11 @@ public class IndexController {
     private final ContentRepository contentRepository;
 
     @GetMapping("/")
-    public String indexController() {
+    public String indexController(Model model) {
+        List<Content> contentsList = (List<Content>) contentRepository.findAll();
+
+        model.addAttribute("contents", contentsList);
+
         return "index";
     }
 
@@ -30,12 +34,17 @@ public class IndexController {
 
     @GetMapping("/logout")
     public String logoutController() {
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("/about")
     public String aboutController() {
         return "about";
+    }
+
+    @GetMapping("/admin/about")
+    public String adminAboutController() {
+        return "adminAbout";
     }
 
     @PostMapping("/admin")
@@ -46,20 +55,17 @@ public class IndexController {
         log.info(ps);
 
         if (ps.equals("0105"))
-            return "adminIndex";
+            return "redirect:/admin";
         else
             return "login";
     }
 
     @GetMapping("/admin")
     public String returnAdminIndex(Model model) {
-        // 모든 아티클 가져오기
         List<Content> contentsList = (List<Content>) contentRepository.findAll();
 
-        // 가져온 아티클 묶음을 뷰로 전달
         model.addAttribute("contents", contentsList);
 
-        // 뷰 페이지를 설정
         return "adminIndex";
     }
 }
