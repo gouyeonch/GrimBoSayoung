@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item">
-                    <a class="nav-link" href="#!">About</a>
+                    <a class="nav-link" href="/about">About</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -40,41 +40,25 @@
         </div>
     </div>
 </nav>
-<br>
-<br>
-<br>
-<br>
-
 <img class="card-img-top" th:src="${content.filepath}" alt="..."/>
 
-<form id="newContent" th:action="@{/content/update/{id}(id=${content.id})}" th:method="put" enctype="multipart/form-data">
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">title</span>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" th:value="${content.title}" name="title">
-    </div>
-    <div class="input-group">
-        <span class="input-group-text">description</span>
-        <textarea class="form-control" aria-label="description" th:text="${content.description}" name="description"></textarea>
-    </div>
-    <br>
-    <div class="input-group">
-        <span class="input-group-text">expression</span>
-        <textarea class="form-control" aria-label="expression" th:text="${content.expression}" name="expression"></textarea>
-    </div>
-    <br>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon2">caption</span>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" th:value="${content.caption}" name="caption">
-    </div>
+<!-- Product Detail..s-->
+<p th:text="${content.title}">내용이 들어간 부분입니다.</p>
+<p th:text="${content.description}">내용이 들어간 부분입니다.</p>
+<p th:text="${content.expression}">내용이 들어간 부분입니다.</p>
+<p th:text="${content.caption}">내용이 들어간 부분입니다.</p>
+
+<form th:action="@{/content/delete/{id}(id=${content.id})}" th:method="delete">
     <button type="submit" class="btn btn-outline-dark">
-        Apply
+        delete
     </button>
 </form>
-<br>
-<br>
-<br>
-<br>
 
+<form th:action="@{/content/update/{id}(id=${content.id})}" th:method="get">
+    <button type="submit" class="btn btn-outline-dark">
+        update
+    </button>
+</form>
 </body>
 <footer class="py-5 bg-dark">
     <div class="container">

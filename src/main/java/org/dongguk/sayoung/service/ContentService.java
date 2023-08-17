@@ -66,4 +66,17 @@ public class ContentService {
     public void deleteContent(Long id) {
         contentRepository.deleteById(id);
     }
+
+    public void updateContent(ContentDto data, Long id) {
+        Content content = contentRepository.findById(id).orElseThrow(
+                () -> new NullPointerException()
+        );
+
+        content.setTitle(data.getTitle());
+        content.setDescription(data.getDescription());
+        content.setExpression(data.getExpression());
+        content.setCaption(data.getCaption());
+
+        contentRepository.save(content);
+    }
 }
