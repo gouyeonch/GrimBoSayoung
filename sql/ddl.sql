@@ -5,5 +5,7 @@ CREATE TABLE `contents` (
                           `filepath` varchar(300) NOT NULL,
                           `expression` varchar(500) NOT NULL,
                           `caption` varchar(50) NOT NULL,
+                          `createdDate` timestamp,
+                          `modifiedDate` timestamp,
                           PRIMARY KEY (`id`)
 );

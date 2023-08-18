@@ -56,6 +56,8 @@
                                     <div class="text-center">
                                         <!-- Product name-->
                                         <h5 class="fw-bolder" th:text="${content.title}"></h5>
+                                        <br>
+                                        <p th:text="${#strings.substring(content.createTime, 0, 4)}">내용이 들어간 부분입니다.</p>
                                     </div>
                                 </div>
                                 <!-- Product actions-->

@@ -47,6 +47,7 @@
 <p th:text="${content.description}">내용이 들어간 부분입니다.</p>
 <p th:text="${content.expression}">내용이 들어간 부분입니다.</p>
 <p th:text="${content.caption}">내용이 들어간 부분입니다.</p>
+<p th:text="${#strings.substring(content.createTime, 0, 4)}">내용이 들어간 부분입니다.</p>
 
 </body>
 <footer class="py-5 bg-dark">

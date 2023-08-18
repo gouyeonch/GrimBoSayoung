@@ -50,6 +50,7 @@
 <p th:text="${content.description}">내용이 들어간 부분입니다.</p>
 <p th:text="${content.expression}">내용이 들어간 부분입니다.</p>
 <p th:text="${content.caption}">내용이 들어간 부분입니다.</p>
+<p th:text="${#strings.substring(content.createTime, 0, 4)}">내용이 들어간 부분입니다.</p>
 
 <form id="delete_form" th:action="@{/admin/content/delete/{id}(id=${content.id})}" th:method="delete">
     <button type="submit" class="btn btn-outline-dark">

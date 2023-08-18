@@ -7,14 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.dongguk.sayoung.dto.ContentDto;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.sql.Timestamp;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "contents")
+@EntityListeners(AuditingEntityListener.class)
 @DynamicUpdate
-public class Content {
+public class Content extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -34,9 +40,6 @@ public class Content {
 
     @Column(name = "caption")
     private String caption;
-
-    //생성년도 추후 추가 필요
-
 
     @Override
     public String toString() {
